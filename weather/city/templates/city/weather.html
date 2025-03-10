@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather in {{ weather.city }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-100 flex items-center justify-center h-screen">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg text-center w-96">
+        <h2 class="text-2xl font-bold text-gray-700 mb-4">Weather in {{ weather.city }}</h2>
+
+        <!-- Display the weather icon -->
+        <img src="{{ weather.icon }}" alt="{{ weather.description }}" class="mx-auto mb-4">
+
+        <p class="text-lg text-gray-600"><strong>Temperature:</strong> {{ weather.temperature }}°C</p>
+        <p class="text-lg text-gray-600"><strong>Humidity:</strong> {{ weather.humidity }}%</p>
+        <p class="text-lg text-gray-600"><strong>Description:</strong> {{ weather.description }}</p>
+        <p class="text-lg text-gray-600"><strong>Wind Speed:</strong> {{ weather.wind_speed }} km/h</p>
+    </div>
+
+    <form action="{% url 'city:weather_city' %}" method="post" class="mt-6 flex justify-center">
+        {% csrf_token %}
+        <input type="text" name="city" placeholder="Enter city name" 
+               class="px-4 py-2 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600">Search</button>
+    </form>
+    
+</body>
+</html>
